@@ -5,13 +5,14 @@
 
 <body class="bg-dark text-light">
 	<div class="container">
-		<header th:replace="~{fragments/header :: header}"></header>
+		<header th:replace="~{fragments/header :: header-logout}"></header>
 
 
 		<div layout:fragment="content"></div>
 
 		<footer th:replace="~{fragments/footer :: footer}"></footer>
-
+		
+		<div th:replace="~{fragments/scripts :: script-bootstrap}"></div>
 	</div>
 </body>
 
