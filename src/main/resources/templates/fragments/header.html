@@ -46,13 +46,14 @@
 			<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
 				data-bs-toggle="dropdown" aria-expanded="false">
 				<img th:src="@{/images/default_perfil.png}" alt="perfil" width="32" height="32" class="rounded-circle">
+				<span th:text="#{menu.welcome.user(${session.user.username})}"></span>
 			</a>
 			<ul class="dropdown-menu text-small">
 				<li><a class="dropdown-item" href="" th:text="#{general.settings.title}"></a></li>
 				<li>
 					<hr class="dropdown-divider">
 				</li>
-				<li><a class="dropdown-item" href="" th:text="#{general.logout.title}"></a></li>
+				<li><a class="dropdown-item" href="/logout" th:text="#{general.logout.title}"></a></li>
 			</ul>
 		</div>
 	</div>

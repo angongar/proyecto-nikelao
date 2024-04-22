@@ -59,6 +59,7 @@ public class LoginController {
 
 			model.addAttribute("errores", errores);
 			model.addAttribute("userLogin", userLogin);
+			session.setAttribute("token", null);
 			session.setAttribute("user", null);
 			return "login/login";
 		}
@@ -101,11 +102,13 @@ public class LoginController {
 			} catch (JsonMappingException e) {
 				// Si la autenticación falla, mostrar un mensaje de error
 				model.addAttribute("error", "Error mapeando el json");
+				session.setAttribute("token", null);
 				session.setAttribute("user", null);
 				return "login/login";
 			} catch (JsonProcessingException e) {
 				// Si la autenticación falla, mostrar un mensaje de error
 				model.addAttribute("error", "Error procesando el json");
+				session.setAttribute("token", null);
 				session.setAttribute("user", null);
 				return "login/login";
 			} catch (IOException e) {
@@ -118,9 +121,20 @@ public class LoginController {
 		} else {
 			// Si la autenticación falla, mostrar un mensaje de error
 			model.addAttribute("error", "Credenciales incorrectas");
+			session.setAttribute("token", null);
 			session.setAttribute("user", null);
 			return "login/login";
 		}
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+
+		session.setAttribute("token", null);
+		session.setAttribute("user", null);
+		return "redirect:/";
+
+	}
+	
 
 }
