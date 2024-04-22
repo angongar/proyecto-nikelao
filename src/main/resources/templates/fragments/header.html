@@ -1,12 +1,12 @@
 <header th:fragment="header-logout"
-	class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start border-bottom">
+	class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start border-bottom mb-3">
 
 	<img style="width: 200px; height: 200px;" th:src="@{/images/logo_nikelao.png}" alt="Logo.png"
 		class="d-flex align-items-center mb-2 mb-lg-0" />
 
 	<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 		<li>
-			<a href="/nikelao" class="nav-link" th:text="#{general.home.title}"></a>
+			<a href="/" class="nav-link" th:text="#{general.home.title}"></a>
 		</li>
 		<li>
 			<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
@@ -17,43 +17,43 @@
 	</ul>
 
 	<div class="text-end">
-		<button type="button" class="btn btn-outline-primary me-2" th:text="#{general.login.title}"></button>
-		<button type="button" class="btn btn-primary" th:text="#{general.signin.title}"></button>
+		<a href="/login" class="btn btn-outline-primary me-2" th:text="#{general.login.title}"></a>
+		<a href="/signin" class="btn btn-primary" th:text="#{general.signin.title}"></a>
 	</div>
 
 </header>
 
 
-<header th:fragment="header-login"
-	class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start border-bottom">
+<header th:fragment="header-login" class="p-1 mb-3 border-bottom">
+	<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
-	<img style="width: 200px; height: 200px;" th:src="@{/images/logo_nikelao.png}" alt="Logo.png"
-		class="d-flex align-items-center mb-2 mb-lg-0" />
+		<img style="width: 200px; height: 200px;" th:src="@{/images/logo_nikelao.png}" alt="Logo.png"
+			class="d-flex align-items-center mb-2 mb-lg-0" />
 
-	<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-		<li>
-			<a href="/nikelao" class="nav-link" th:text="#{general.home.title}"></a>
-		</li>
-		<li>
-			<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
-		</li>
-		<li>
-			<a href="/aboutme" class="nav-link" th:text="#{general.aboutme.title}"></a>
-		</li>
-	</ul>
-
-	<div class="dropdown text-end">
-		<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
-			aria-expanded="false">
-			<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-		</a>
-		<ul class="dropdown-menu text-small">
-			<li><a class="dropdown-item" href="" th:text="#{general.settings.title}"></a></li>
+		<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 			<li>
-				<hr class="dropdown-divider">
+				<a href="/nikelao" class="nav-link" th:text="#{general.home.title}"></a>
 			</li>
-			<li><a class="dropdown-item" href="" th:text="#{general.logout.title}"></a></li>
+			<li>
+				<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
+			</li>
+			<li>
+				<a href="/aboutme" class="nav-link" th:text="#{general.aboutme.title}"></a>
+			</li>
 		</ul>
-	</div>
 
+		<div class="dropdown text-end">
+			<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+				data-bs-toggle="dropdown" aria-expanded="false">
+				<img th:src="@{/images/default_perfil.png}" alt="perfil" width="32" height="32" class="rounded-circle">
+			</a>
+			<ul class="dropdown-menu text-small">
+				<li><a class="dropdown-item" href="" th:text="#{general.settings.title}"></a></li>
+				<li>
+					<hr class="dropdown-divider">
+				</li>
+				<li><a class="dropdown-item" href="" th:text="#{general.logout.title}"></a></li>
+			</ul>
+		</div>
+	</div>
 </header>
