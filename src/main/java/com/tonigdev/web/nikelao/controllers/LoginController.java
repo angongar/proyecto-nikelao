@@ -132,7 +132,8 @@ public class LoginController {
 
 		session.setAttribute("token", null);
 		session.setAttribute("user", null);
-		return "redirect:/";
+
+		return "redirect:/login";
 
 	}
 	
