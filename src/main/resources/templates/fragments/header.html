@@ -39,9 +39,9 @@
 				<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
 			</li>
 			<li th:if="${session.user.authorities.contains('ROLE_ADMIN')}">
-				<a href="/dates" class="nav-link" th:text="#{general.dates.today.title}"></a>
+				<a href="/datestoday" class="nav-link" th:text="#{general.dates.today.title}"></a>
 			</li>
-			<li>
+			<li th:if="${session.user.authorities.contains('ROLE_USER')}">
 				<a href="/mydates" class="nav-link" th:text="#{general.mydates.title}"></a>
 			</li>
 			<li>

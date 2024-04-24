@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/layout}">
+
+<body>
+
+	<div layout:fragment="content" class="container">
+		<div th:replace="~{fragments/scripts :: script-jquery}"></div>		
+		<div th:replace="~{fragments/scripts :: script-datatable}"></div>
+		<div class="container mt-5">
+			<input type="hidden" id="user" th:attr="userid=${session.user.id}">
+
+			<!-- Incluye el fragmento del datatable -->
+			<table id="tableDatesToday" class="table table-striped">
+				<thead>
+					<tr>
+						<th th:text="#{dates.hour}"></th>						
+						<th	th:text="#{dates.client.name}"></th>						
+						<th th:text="#{dates.client.phone}"></th>						
+						<th	th:text="#{dates.stateDate.stateName}"></th>
+						<th></th>						
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>		
+		<script th:replace="~{fragments/ready :: ready-datestoday}"></script>
+	</div>
+</body>
+
+
+</html>

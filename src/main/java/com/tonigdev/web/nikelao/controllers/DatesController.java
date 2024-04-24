@@ -22,10 +22,16 @@ public class DatesController {
 		if(session.getAttribute("user") == null) {
 			return "redirect:/login";
 		}
-		
-		
-		
 		return "comun/dates";
+	}
+	
+	@GetMapping("/datestoday")
+	public String datestoday(HttpSession session) {
+		
+		if(session.getAttribute("user") == null) {
+			return "redirect:/login";
+		}
+		return "admin/datestoday";
 	}
 	
 

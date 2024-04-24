@@ -29,3 +29,15 @@
 
 
 </script>
+
+<!-- Ready usado en la pantalla Dates-->
+<script th:fragment="ready-datestoday">
+
+	$(document).ready(function () {
+		var date = new Date()
+		initializeDataTableToday(date);
+		
+	});
+
+
+</script>

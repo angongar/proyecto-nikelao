@@ -5,8 +5,8 @@ function getNotAvailableDates(date) {
 		data: { date: date },
 		success: function(data) {
 			if (data?.results != null && data?.results.length > 0) {
-				data.results.forEach(function(dates){
-					deleteRowDataTable(dates.horary.id);			
+				data.results.forEach(function(dates) {
+					deleteRowDataTable(dates.horary.id);
 				});
 			} else {
 				console.log('No hay datos.', data);
@@ -63,6 +63,52 @@ function addDate(clientid, horary, date, stateDateId) {
 		},
 		error: function(xhr, status, error) {
 			console.error('addDate', error);
+		}
+	});
+}
+
+function cancelDateToClient(date) {
+	let jsonData = JSON.stringify({ date: date })
+	$.ajax({
+		url: 'http://localhost:8010/api-nikelao/canceldates',
+		method: 'PUT',
+		contentType: 'application/json', // Indica que se está enviando JSON
+		data: jsonData,
+		success: function(data) {
+			if (data?.results != null && data?.results.length > 0) {
+				let dateid = data.results[0].horary.id;
+				let state = data.results[0].stateDate.name;
+				updateRowDataTableToday(dateid, state);
+			} else {
+
+				console.log('No se encontraron datos.', data);
+			}
+		},
+		error: function(xhr, status, error) {
+			console.error('cancelDateToClient:', error);
+		}
+	});
+}
+
+function finishDateToClient(date) {
+	let jsonData = JSON.stringify({ date: date })
+	$.ajax({
+		url: 'http://localhost:8010/api-nikelao/finishdates',
+		method: 'PUT',
+		contentType: 'application/json', // Indica que se está enviando JSON
+		data: jsonData,
+		success: function(data) {
+			if (data?.results != null && data?.results.length > 0) {
+				let dateid = data.results[0].horary.id;
+				let state = data.results[0].stateDate.name;
+				updateRowDataTableToday(dateid, state);
+			} else {
+
+				console.log('No se encontraron datos.', data);
+			}
+		},
+		error: function(xhr, status, error) {
+			console.error('cancelDateToClient:', error);
 		}
 	});
 }
@@ -129,7 +175,7 @@ function updateDataTable() {
 			addDateToClient(clientid, horary, date, stateDateId);
 		});
 
-		$(row).find('td:eq(1)').html(button);
+		$(row).find('td:last').html(button);
 
 	});
 }
@@ -184,3 +230,65 @@ function deleteRowDataTable(horaryid) {
 	}
 
 }
+
+function updateRowDataTableToday(dateid, state) {
+	var row = document.querySelector('[dateid="' + dateid + '"]');
+	if (row) {
+		var table = $('#tableDatesToday').DataTable();
+
+		// Deshabilitar el botón dentro de la fila
+		$(row).find('button.btn').prop('disabled', true);
+	}
+
+}
+
+function initializeDataTableToday(date) {
+	$.ajax({
+		url: 'http://localhost:8010/api-nikelao/datestoday',
+		method: 'GET',
+		data: { date: date },
+		success: function(data) {
+			if (data?.results != null && data?.results.length > 0) {
+				createDataTableToday(data?.results);
+			} else {
+				console.log('No se encontraron datos.', data);
+			}
+		},
+		error: function(xhr, status, error) {
+			console.error('initializeDataTable', error);
+		}
+	});
+}
+
+function createDataTableToday(data) {
+	var table = $('#tableDatesToday').DataTable({});
+	table.clear().draw();
+
+	data.forEach(function(date) {
+		var name = date.client.name + " " + date.client.surname;
+		var row = table.row.add([date.horary.hour, name, date.client.phone, date.stateDate.stateName, '', '']).draw().node();
+		$(row).attr('dateid', date.horary.id);
+
+		if (date.stateDate.stateName !== "CANCELADA" && date.stateDate.stateName !== "FINALIZADA") {
+			var cancel = document.createElement('button');
+			cancel.textContent = 'Cancelar';
+			cancel.className = 'btn btn-danger';
+			$(cancel).on('click', function() {
+				cancelDateToClient(date);
+			});
+
+			$(row).find('td:last').prev().html(cancel);
+			
+			var finish = document.createElement('button');
+			finish.textContent = 'Finalizar';
+			finish.className = 'btn btn-success';
+			$(finish).on('click', function() {
+				finishDateToClient(date);
+			});
+
+			$(row).find('td:last').html(finish);
+		}
+	});
+
+}
+
