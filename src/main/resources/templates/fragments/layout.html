@@ -8,7 +8,7 @@
 		<th:block th:if="${session.user != null}">
 			<header th:replace="~{fragments/header :: header-login}"></header>
 		</th:block>
-		
+
 		<th:block th:unless="${session.user != null}">
 			<header th:replace="~{fragments/header :: header-logout}"></header>
 		</th:block>
@@ -17,8 +17,10 @@
 		<div layout:fragment="content"></div>
 
 		<footer th:replace="~{fragments/footer :: footer}"></footer>
+	
+		<div th:replace="~{fragments/scripts :: script-nikelao}"></div>	
 
-		<div th:replace="~{fragments/scripts :: script-bootstrap}"></div>
+		
 	</div>
 </body>
 

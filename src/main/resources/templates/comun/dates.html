@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html layout:decorate="~{fragments/layout}">
+
+<body>
+
+	<div layout:fragment="content" class="container">
+		<div th:replace="~{fragments/scripts :: script-jquery}"></div>
+		<div th:replace="~{fragments/scripts :: script-fullcalendar}"></div>			
+		<div th:replace="~{fragments/scripts :: script-datatable}"></div>
+		<div class="container mt-5">
+			<input type="hidden" id="user" th:attr="userid=${session.user.id}">
+			<input type="hidden" id="listHorary">
+			<input type="hidden" id="selectedDate">
+
+			<!-- Incluye el fragmento del calendar -->
+			<h2 class="text-center m-5" th:text="#{dates.calendar.title}"></h2>
+			<div class="input-group date mx-auto w-50">
+				<div class="card-body" id="calendarDates"> </div>
+			</div>
+
+			<!-- Incluye el fragmento del datatable -->
+			<table id="tableAvailableDates" class="table table-striped">
+				<thead>
+					<tr>
+						<th>Horas disponibles</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>		
+		<script th:replace="~{fragments/ready :: ready-dates}"></script>
+	</div>
+</body>
+
+
+</html>

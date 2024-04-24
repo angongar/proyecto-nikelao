@@ -1,0 +1,31 @@
+<!-- Ready usado en la pantalla Dates-->
+<script th:fragment="ready-dates">
+
+	$(document).ready(function () {
+
+		initializeDataTable();
+
+		var calendarEl = document.getElementById('calendarDates');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView: 'dayGridMonth',
+			selectable: true, // Permitir selección de días
+			select: function (info) {
+				// Función que se ejecuta al seleccionar un día
+				var date = info.startStr;
+				document.getElementById('selectedDate').value = date;
+				updateDataTable();
+				getNotAvailableDates(date);
+			},
+			validRange: {
+				start: new Date(), // Solo permitir fechas a partir de hoy
+				end: '9999-12-31' // Hasta el final del tiempo
+			},
+			weekends: false // Desactivar fines de semana
+		});
+		calendar.render();
+
+	});
+
+
+
+</script>

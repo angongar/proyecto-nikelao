@@ -8,6 +8,7 @@
 		<li>
 			<a href="/" class="nav-link" th:text="#{general.home.title}"></a>
 		</li>
+
 		<li>
 			<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
 		</li>
@@ -32,10 +33,16 @@
 
 		<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 			<li>
-				<a href="/nikelao" class="nav-link" th:text="#{general.home.title}"></a>
+				<a href="/" class="nav-link" th:text="#{general.home.title}"></a>
+			</li>
+			<li th:if="${session.user.authorities.contains('ROLE_USER')}">
+				<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
+			</li>
+			<li th:if="${session.user.authorities.contains('ROLE_ADMIN')}">
+				<a href="/dates" class="nav-link" th:text="#{general.dates.today.title}"></a>
 			</li>
 			<li>
-				<a href="/dates" class="nav-link" th:text="#{general.dates.title}"></a>
+				<a href="/mydates" class="nav-link" th:text="#{general.mydates.title}"></a>
 			</li>
 			<li>
 				<a href="/aboutme" class="nav-link" th:text="#{general.aboutme.title}"></a>
@@ -46,9 +53,9 @@
 			<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
 				data-bs-toggle="dropdown" aria-expanded="false">
 				<img th:src="@{/images/default_perfil.png}" alt="perfil" width="32" height="32" class="rounded-circle">
-				<span th:text="#{menu.welcome.user(${session.user.username})}"></span>
+				<span class="text-white" th:text=" #{menu.welcome.user(${session.user.username})}"></span>
 			</a>
-			<ul class="dropdown-menu text-small">
+			<ul class="dropdown-menu text-small text-white">
 				<li><a class="dropdown-item" href="" th:text="#{general.settings.title}"></a></li>
 				<li>
 					<hr class="dropdown-divider">

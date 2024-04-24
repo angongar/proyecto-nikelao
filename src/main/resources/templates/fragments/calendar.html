@@ -1,0 +1,24 @@
+<div th:fragment="calendar">
+	<div th:replace="~{fragments/scripts :: script-fullcalendar}"></div>
+	<!-- Otros scripts y configuraciones para el datatable -->
+
+	<h2 class="text-center">Selecciona una fecha</h2>
+	<div class="input-group date mx-auto w-50">
+		<div class="card-body" id="calendarDates"> </div>
+	</div>
+
+	<script>
+		var calendarEl = document.getElementById('calendarDates');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView: 'dayGridMonth',
+			selectable: true, // Permitir selección de días
+			select: function (info) {
+				// Función que se ejecuta al seleccionar un día
+				getAvailableDates(info.startStr);
+			},
+			events: 'events.json' // Ruta a la fuente de datos de eventos
+		});
+		calendar.render();
+
+	</script>
+</div>
